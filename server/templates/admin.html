@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">    
+    <title>COMP90074 Assignment 2 - Admin Panel</title>
+  </head>
+  <body>
+    <div class="page-container">      
+      <div class="login-container">
+	<div class="login-header">Admin Panel</div>
+	<div class="login-instructions">
+	  Welcome, <b>{{session["username"]}}</b>. <a href="/">Home</a> &nbsp;|&nbsp; <a href="/logout">Logout</a>
+	</div>
+	
+	<div class="login-instructions">Delete a user account and their cached files by selecting the username below and clicking the <b>Delete</b> button.</div>
+	<form method="POST" class="login-form">
+	  <label for="username">Username:</label>
+	  <select id="username" name="username">
+	    {% for usr in users %}
+	    <option value="{{ usr }}">{{ usr }}</option>
+	    {% endfor %}
+	  </select>
+	  <button class="login-button" type="submit">Delete</button>
+	</form>
+      </div>
+    </div>
+  </body>
+</html>

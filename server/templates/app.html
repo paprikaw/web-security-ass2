@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+  <title>COMP90074 Assignment 2</title>  
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div class="page-container">
+    <div class="login-container">
+      <div class="login-header">Private Blog App</div>
+      <div class="login-instructions">
+	Welcome, <b>{{session["username"]}}</b>. <a href="/logout">Logout</a>
+      </div>
+      {% if session["username"] == "admin" %}
+      <div class="login-instructions">
+	<a href="/admin">Administrator Panel</a>
+      </div>
+      {% endif %}
+      <form method="POST" action="/post" class="message-form">
+	
+	<textarea class="message-input" placeholder="What's on your mind?" name="msg" id="msg"></textarea>
+	<button class="post-button" type="submit">Post</button>
+      </form>
+
+      {% if messages %}
+      {% for msg in messages %}
+      <!-- all messages are already sanitised when they are posted, so we treat them as safe -->
+      <div class="message">
+	<div class="postedby">{{ msg.postedby }}</div>
+	<div class="content">{{ msg.content|safe }}</div>
+	<div class="timestamp">{{ msg.timestamp }} </div>
+	<form action="/deletemsg" method="POST">
+	  <input type="hidden" name="id" value="{{ msg.id }}">
+	  <button type="submit" class="delete-button" title="Delete Post">
+	    <span class="delete-icon">&#10006;</span>
+	  </button>
+	</form>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+    <div class="login-container">
+      <a href="/download">Download My Messages</a>
+    </div>
+    <div class="login-container">
+      <form class="login-form" action="/deleteaccount" method="POST">
+	<button type="submit" class="login-button">Delete My Account</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

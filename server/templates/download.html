@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <title>COMP90074 Assignment 2</title>  
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div class="page-container">
+    <div class="login-container">
+      <div class="login-header">Private Blog App</div>
+      <div class="login-instructions">
+	Welcome, <b>{{session["username"]}}</b>. <a href="/">Home</a> &nbsp;|&nbsp; <a href="/logout">Logout</a>
+      </div>
+      <div class="login-instructions">
+	Download your data by selecting the data format and clicking the
+	<b>Download Messages</b> button below.
+      </div>
+      <form method="POST" action="download" class="message-form">
+	<label for="extension">Data format:</label>
+	<select id="extension" name="extension">
+	  <option value="csv">CSV</option>
+	  <option value="json">JSON</option>
+	</select><br/>
+	<button class="post-button" type="submit">Download Messages</button>
+      </form>
+      
+    </div>
+  </div>
+</body>
+</html>
